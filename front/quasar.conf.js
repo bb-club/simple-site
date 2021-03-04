@@ -2,7 +2,6 @@
  * This file runs in a Node context (it's NOT transpiled by Babel), so use only
  * the ES6 features that are supported by your Node version. https://node.green/
  */
-
 // Configuration for your app
 // https://quasar.dev/quasar-cli/quasar-conf-js
 
@@ -78,7 +77,7 @@ module.exports = function (/* ctx */) {
     framework: {
       iconSet: 'material-icons', // Quasar icon set
       lang: 'en-us', // Quasar language pack
-      config: {},
+      config: {loading: { delay: 300, spinner: 'QSpinnerGears' }},
 
       // Possible values for "importStrategy":
       // * 'auto' - (DEFAULT) Auto-import needed Quasar components & directives
@@ -94,6 +93,7 @@ module.exports = function (/* ctx */) {
 
       // Quasar plugins
       plugins: [
+        'Loading',
         'LocalStorage',
         'Meta'
       ]
@@ -105,17 +105,19 @@ module.exports = function (/* ctx */) {
 
     // https://quasar.dev/quasar-cli/developing-ssr/configuring-ssr
     ssr: {
-      pwa: false
+      pwa: true
     },
 
     // https://quasar.dev/quasar-cli/developing-pwa/configuring-pwa
     pwa: {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
-      workboxOptions: {}, // only for GenerateSW
+      workboxOptions: {
+        maximumFileSizeToCacheInBytes: 5000000
+      }, // only for GenerateSW
       manifest: {
-        name: `Quasar App`,
-        short_name: `Quasar App`,
-        description: `A Quasar Framework app`,
+        name: `Алексеевсекий`,
+        short_name: `Meat Processing Plant`,
+        description: `Meat Processing Plant Alekseevsky`,
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',

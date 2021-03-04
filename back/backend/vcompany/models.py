@@ -36,6 +36,7 @@ class IndexModel(models.Model):
     image_src = models.ImageField(upload_to='img/index', verbose_name='изображение', blank=True)
     status = models.CharField(choices=status_choices, max_length=10, default='published')
     created = models.DateTimeField(auto_now_add=True)
+    category = models.ForeignKey('Category', on_delete=models.CASCADE)
 
     class Meta:
         ordering = ('-created',)

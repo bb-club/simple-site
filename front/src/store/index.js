@@ -1,6 +1,11 @@
 import axios from 'axios'
+import {
+  Loading
+} from 'quasar'
 
-const BASE_URL = 'localhost:8000' // 'localhost:8000' // '212.109.219.204'
+const BASE_URL = 'https://amk.of.by' // 'http://localhost:8000' // https://amk.of.by
+
+let loading = false
 
 let getterObj = function () {
   return this.state
@@ -9,14 +14,16 @@ let getterObj = function () {
 let setterObj = function (arg, lang) {
   let url = ''
   if (this.endpoint && !arg) {
-    url = `http://${BASE_URL}/api/${this.endpoint}?lang=${lang}`
+    url = `${BASE_URL}/api/${this.endpoint}?lang=${lang}`
   } else if (this.endpoint && arg) {
-    url = `http://${BASE_URL}/api/${this.endpoint}/${arg}&lang=${lang}`
+    url = `${BASE_URL}/api/${this.endpoint}/${arg}&lang=${lang}`
   }
   if (this.endpoint) {
+    Loading.show()
     axios.get(url)
     .then((response) => {
       this.state = response.data
+      Loading.hide()
     })
   }
 }
@@ -73,8 +80,15 @@ export default {
     endpoint: 'page/3',
     __proto__: obj
   },
+  about: {
+    state: [],
+    endpoint: 'page/4',
+    __proto__: obj
+  },
   new: {
     state: [],
     __proto__: obj
   }
 }
+
+export { BASE_URL }

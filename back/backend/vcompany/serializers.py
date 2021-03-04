@@ -6,7 +6,7 @@ class AbstractSerializer:
     translate_field = 'title'
 
     def translate(self, request, result, attr):
-        if request and request.query_params['lang']:
+        if request and request.query_params.get('lang'):
             lang = request.query_params['lang']
             if lang != 'ru':
                 result[attr] = result[f'{attr}_{lang}']

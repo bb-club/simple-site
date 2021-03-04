@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
     <div class="row width-block">
-      <div class="row col-12 justify-between">
+      <div :key="up" class="row col-12 justify-between">
         <q-select
             filled
             v-model="filter"
@@ -47,9 +47,9 @@
           <q-card-section class="q-pt-none">
             <div class="text-subtitle1" v-text="$t(product.category.name)">
             </div>
-            <div class="text-caption text-grey">
-              {{  product.description }}
-            </div>
+<!--            <div class="text-caption text-grey">-->
+<!--              {{  product.description }}-->
+<!--            </div>-->
           </q-card-section>
 <!--            <q-separator />-->
 <!--            <q-card-actions align="right">-->
@@ -75,8 +75,10 @@
 <script>
 export default {
   name: 'Products',
+  props: ['categoryFilter'],
    data () {
     return {
+      up: 'u',
       slide: 1,
       page: 1,
       autoplay: true,
@@ -95,7 +97,7 @@ export default {
       return category
     },
     productsGet() {
-      return this.$store.products.getObj()
+      return this.$store.products.state
     },
   },
   methods: {
@@ -107,6 +109,11 @@ export default {
         params = '?'
       }
       this.$store.products.setObj(params + `page=${this.page}`, this.$i18n.locale)
+    },
+    setProps() {
+        if (this.categoryFilter) {
+          this.filter.push(Number.parseInt(this.categoryFilter))
+        }
     }
   },
   watch: {
@@ -123,7 +130,11 @@ export default {
   },
   created() {
     this.$store.categorylist.setObj(null, this.$i18n.locale)
-    this.$store.products.setObj(null, this.$i18n.locale)
+    if (!this.categoryFilter) {
+      this.$store.products.setObj(null, this.$i18n.locale)
+    }
+    // this.$q.loading.show()
+    this.setProps()
   }
 }
 </script>

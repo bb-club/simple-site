@@ -3,8 +3,11 @@
 // so you can safely delete all default props below
 
 export default {
+  title: 'OOO“肉类加工厂Alekseevsky”',
   production:	'生产',
   delivery:	'交货',
+  requisites: '必备条件',
+  categories: '主要类别',
   partners:	'伙伴',
   news:	'新闻',
   contacts:	'联络人',

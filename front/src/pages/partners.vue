@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    <div class="width-block" v-html="$store.partners.getObj().text"></div>
+    <q-img :src="$store.BASE_URL"
   </q-page>
 </template>
 

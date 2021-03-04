@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
     <div class="width-block column">
-      <div v-html="$store.contact.getObj().text"></div>
+      <div class="text-body1 text-grey-8" v-html="$store.contact.getObj().text"></div>
       <yandex-map zoom="12" :coords="coords" style="height: 400px">
         <ymap-marker
         marker-id="123"
